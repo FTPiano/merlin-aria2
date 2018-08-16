@@ -10,6 +10,10 @@ if [ ! -f ./history/version ];then
 	touch ./history/version
 fi
 
+if [ "$(uname)" == "Darwin" ]; then
+    alias md5sum='md5 -r'
+fi
+
 version_old=`cat history/version | awk '{print $1}' | sort -rn |sed -n 1p`
 version_new=`cat config.json.js |grep "version"|cut -d"\"" -f 4`
 md5_old=`cat history/version | sort -nk1 | awk '{print $1}' |sed -n 1p`
